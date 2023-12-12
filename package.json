@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "description": "A Strapi application",
   "scripts": {
-    "develop": "strapi develop",
+    "dev": "strapi develop",
     "start": "strapi start",
     "build": "strapi build",
     "strapi": "strapi"
@@ -15,6 +15,7 @@
     "@strapi/plugin-users-permissions": "4.14.3",
     "@strapi/strapi": "4.14.3",
     "better-sqlite3": "8.6.0",
+    "strapi-plugin-populate-deep": "^3.0.0",
     "strapi-plugin-vercel-deploy": "^1.4.0"
   },
   "author": {

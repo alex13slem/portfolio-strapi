@@ -15,9 +15,6 @@
     "Title": {
       "type": "string"
     },
-    "Description": {
-      "type": "richtext"
-    },
     "Picture": {
       "type": "media",
       "multiple": false,
@@ -36,6 +33,12 @@
       "type": "uid",
       "targetField": "Title",
       "required": true
+    },
+    "About": {
+      "type": "richtext"
+    },
+    "Experience": {
+      "type": "richtext"
     }
   }
 }
