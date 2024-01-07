@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "art_technologies",
+  "info": {
+    "singularName": "art-technology",
+    "pluralName": "art-technologies",
+    "displayName": "Article Technology",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "link": {
+      "type": "string"
+    },
+    "DescriptionMD": {
+      "type": "richtext"
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "web-framework",
+        "ui-framework",
+        "cms",
+        "hosting",
+        "feedback"
+      ]
+    },
+    "order": {
+      "type": "integer"
+    }
+  }
+}

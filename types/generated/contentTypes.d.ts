@@ -677,35 +677,36 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
-export interface ApiArticleArticle extends Schema.CollectionType {
-  collectionName: 'articles';
+export interface ApiArtExperienceArtExperience extends Schema.CollectionType {
+  collectionName: 'art_experiences';
   info: {
-    singularName: 'article';
-    pluralName: 'articles';
-    displayName: 'Article';
+    singularName: 'art-experience';
+    pluralName: 'art-experiences';
+    displayName: 'Article Experience';
     description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    Title: Attribute.String;
-    Picture: Attribute.Media;
-    Link: Attribute.String;
-    slug: Attribute.UID<'api::article.article', 'Title'> & Attribute.Required;
-    About: Attribute.RichText;
-    Experience: Attribute.RichText;
+    title: Attribute.String;
+    link: Attribute.String;
+    TitleMD: Attribute.RichText;
+    DescriptionMD: Attribute.RichText;
+    BodyMD: Attribute.RichText;
+    thumb: Attribute.Media;
+    order: Attribute.Integer;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::article.article',
+      'api::art-experience.art-experience',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::article.article',
+      'api::art-experience.art-experience',
       'oneToOne',
       'admin::user'
     > &
@@ -713,36 +714,221 @@ export interface ApiArticleArticle extends Schema.CollectionType {
   };
 }
 
-export interface ApiSectionSection extends Schema.CollectionType {
-  collectionName: 'sections';
+export interface ApiArtProjectArtProject extends Schema.CollectionType {
+  collectionName: 'art_projects';
   info: {
-    singularName: 'section';
-    pluralName: 'sections';
-    displayName: 'Section';
+    singularName: 'art-project';
+    pluralName: 'art-projects';
+    displayName: 'Article Project';
     description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    articles: Attribute.Relation<
-      'api::section.section',
+    title: Attribute.String;
+    link: Attribute.String;
+    thumb: Attribute.Media;
+    TitleMD: Attribute.RichText;
+    DescriptionMD: Attribute.RichText;
+    technologies: Attribute.Relation<
+      'api::art-project.art-project',
       'oneToMany',
-      'api::article.article'
+      'api::art-technology.art-technology'
     >;
-    Title: Attribute.String;
-    slug: Attribute.UID<'api::section.section', 'Title'> & Attribute.Required;
+    order: Attribute.Integer;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::section.section',
+      'api::art-project.art-project',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::section.section',
+      'api::art-project.art-project',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiArtTechnologyArtTechnology extends Schema.CollectionType {
+  collectionName: 'art_technologies';
+  info: {
+    singularName: 'art-technology';
+    pluralName: 'art-technologies';
+    displayName: 'Article Technology';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    link: Attribute.String;
+    DescriptionMD: Attribute.RichText;
+    category: Attribute.Enumeration<
+      ['web-framework', 'ui-framework', 'cms', 'hosting', 'feedback']
+    >;
+    order: Attribute.Integer;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::art-technology.art-technology',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::art-technology.art-technology',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiNavLinkNavLink extends Schema.CollectionType {
+  collectionName: 'nav_links';
+  info: {
+    singularName: 'nav-link';
+    pluralName: 'nav-links';
+    displayName: 'NavLink';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    text: Attribute.String;
+    link: Attribute.String;
+    order: Attribute.Integer;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::nav-link.nav-link',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::nav-link.nav-link',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSectExperienceSectExperience extends Schema.SingleType {
+  collectionName: 'sect_experiences';
+  info: {
+    singularName: 'sect-experience';
+    pluralName: 'sect-experiences';
+    displayName: 'Section Experience';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    articles: Attribute.Relation<
+      'api::sect-experience.sect-experience',
+      'oneToMany',
+      'api::art-experience.art-experience'
+    >;
+    nav_link: Attribute.Relation<
+      'api::sect-experience.sect-experience',
+      'oneToOne',
+      'api::nav-link.nav-link'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::sect-experience.sect-experience',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::sect-experience.sect-experience',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSectHeroSectHero extends Schema.SingleType {
+  collectionName: 'sect_heroes';
+  info: {
+    singularName: 'sect-hero';
+    pluralName: 'sect-heroes';
+    displayName: 'Section Hero';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    tg_link: Attribute.String;
+    nav_link: Attribute.Relation<
+      'api::sect-hero.sect-hero',
+      'oneToOne',
+      'api::nav-link.nav-link'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::sect-hero.sect-hero',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::sect-hero.sect-hero',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSectProjectsSectProjects extends Schema.SingleType {
+  collectionName: 'sect_projectss';
+  info: {
+    singularName: 'sect-projects';
+    pluralName: 'sect-projectss';
+    displayName: 'Section Projects';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    articles: Attribute.Relation<
+      'api::sect-projects.sect-projects',
+      'oneToMany',
+      'api::art-project.art-project'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::sect-projects.sect-projects',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::sect-projects.sect-projects',
       'oneToOne',
       'admin::user'
     > &
@@ -766,8 +952,13 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'api::article.article': ApiArticleArticle;
-      'api::section.section': ApiSectionSection;
+      'api::art-experience.art-experience': ApiArtExperienceArtExperience;
+      'api::art-project.art-project': ApiArtProjectArtProject;
+      'api::art-technology.art-technology': ApiArtTechnologyArtTechnology;
+      'api::nav-link.nav-link': ApiNavLinkNavLink;
+      'api::sect-experience.sect-experience': ApiSectExperienceSectExperience;
+      'api::sect-hero.sect-hero': ApiSectHeroSectHero;
+      'api::sect-projects.sect-projects': ApiSectProjectsSectProjects;
     }
   }
 }

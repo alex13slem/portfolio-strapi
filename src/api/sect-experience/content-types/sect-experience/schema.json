@@ -1,0 +1,29 @@
+{
+  "kind": "singleType",
+  "collectionName": "sect_experiences",
+  "info": {
+    "singularName": "sect-experience",
+    "pluralName": "sect-experiences",
+    "displayName": "Section Experience",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "articles": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::art-experience.art-experience"
+    },
+    "nav_link": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::nav-link.nav-link"
+    }
+  }
+}

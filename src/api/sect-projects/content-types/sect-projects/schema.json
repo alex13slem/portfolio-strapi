@@ -1,0 +1,23 @@
+{
+  "kind": "singleType",
+  "collectionName": "sect_projectss",
+  "info": {
+    "singularName": "sect-projects",
+    "pluralName": "sect-projectss",
+    "displayName": "Section Projects"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "articles": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::art-project.art-project"
+    }
+  }
+}
